@@ -1,0 +1,14 @@
+.post-card {
+  position: relative;
+  /* height: 50vh; */
+  /* width: 20vw; */
+  border-radius: 0.75rem;
+  border: 1px solid gray;
+  background-color: var(--primary-color-900);
+  padding: 2rem;
+}
+
+.button-wrapper {
+  display: flex;
+  gap: 20px;
+}

@@ -1,0 +1,11 @@
+.modal-menu {
+  width: 25rem;
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--modal-bg);
+  position: absolute;
+  right: 0;
+  top: 8vh;
+}
