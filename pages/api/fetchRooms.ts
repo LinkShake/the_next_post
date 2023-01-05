@@ -15,7 +15,7 @@ export default async function handler(
 
       res.status(200).json(rooms);
     } else {
-      res.status(401).json({ msg: "Invalid fetch method" });
+      res.status(405).json({ msg: "Invalid fetch method" });
     }
   } catch (err: any) {
     console.log(err);
