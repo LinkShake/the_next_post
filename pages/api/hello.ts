@@ -9,7 +9,7 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  res.redirect("/home");
+  // res.redirect("/home");
 
   res.status(200).json({ name: "John Doe" });
 }

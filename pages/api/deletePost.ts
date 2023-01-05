@@ -9,8 +9,11 @@ export default async function handler(
   const { method } = req;
   const { body } = req;
 
+  console.log(body);
+
   try {
-    const data = JSON.parse(body);
+    const data = body;
+    console.log(data);
     await dbConnect();
 
     if (method === "DELETE") {
@@ -30,8 +33,10 @@ export default async function handler(
 
       //   res.redirect(`/${data.roomName}?id=${data.roomId}`);
       res.status(200).json({ msg: "Success" });
-    } else res.status(401).json({ msg: "Invalid fetch method" });
+    } else {
+      res.status(401).json({ msg: "Invalid fetch method" });
+    }
   } catch (err: any) {
-    console.log(err.message);
+    console.log(err);
   }
 }

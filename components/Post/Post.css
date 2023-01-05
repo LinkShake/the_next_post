@@ -1,7 +1,9 @@
 .post-card {
   position: relative;
-  /* height: 50vh; */
-  /* width: 20vw; */
+  height: 40rem;
+  max-height: 40rem;
+  overflow-y: auto;
+  width: 50rem;
   border-radius: 0.75rem;
   border: 1px solid gray;
   background-color: var(--primary-color-900);
@@ -10,5 +12,8 @@
 
 .button-wrapper {
   display: flex;
+  position: absolute;
+  bottom: 0.75vw;
+  right: 0.75vw;
   gap: 20px;
 }

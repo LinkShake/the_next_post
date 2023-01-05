@@ -14,7 +14,7 @@ export default async function handler(
 
     if (method === "POST") {
       await Room.create({
-        roomName: body.roomName,
+        roomName: body.roomName.toLowerCase().trim(),
         description: body.description,
         posts: [],
       });

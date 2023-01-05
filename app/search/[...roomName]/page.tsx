@@ -1,5 +1,6 @@
 import { Room } from "interfaces/Room";
 import Link from "next/link";
+import "./style.css";
 
 export default async function Page({
   params,
@@ -9,11 +10,15 @@ export default async function Page({
   searchParams: any;
 }) {
   const { roomName } = params;
+  console.log(roomName);
   let res;
 
   if (roomName.length) {
     res = await fetch(`${process.env.BASE_URL}/api/search`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         value: roomName[0],
         originalURL: `/search/${roomName[0]}`,
@@ -41,10 +46,7 @@ export default async function Page({
             >
               {roomName}
             </Link>
-            <div className="users-displayer">
-              {/* <IoStarOutline /> */}
-              {usersNum}
-            </div>
+            <div className="users-displayer">{usersNum}</div>
           </div>
         );
       })}

@@ -35,3 +35,10 @@
   gap: 10px;
   background-color: gray;
 }
+
+.posts-wrapper {
+  display: flex;
+  justify-content: center;
+  border: 1px solid red;
+  padding: 2vw;
+}

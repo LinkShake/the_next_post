@@ -2,6 +2,7 @@
 import { AuthContext } from "components/AuthContext";
 import { PostData } from "interfaces/PostsData";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import "./Post.css";
 
 interface PostProps {
@@ -20,6 +21,10 @@ export const Post: React.FC<PostProps> = ({
   roomName: string;
 }) => {
   const { _id, title, body, author } = data;
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [postTitle, setPostTitle] = useState<string>(title);
+  const [postContent, setPostContent] = useState<string>(body);
+  const router = useRouter();
   const apiData = {
     roomId,
     roomName,
@@ -28,33 +33,67 @@ export const Post: React.FC<PostProps> = ({
     content: body,
     author,
   };
-
-  const router = useRouter();
-
-  // console.log(apiData);
+  const editData = {
+    roomId,
+    roomName,
+    id: _id,
+    author,
+    title: postTitle,
+    content: postContent,
+  };
 
   return (
     <AuthContext>
       <div className="post-card">
         <h2>Post by {author}</h2>
-        <h2>{title}</h2>
-        <p>{body}</p>
+        {!isEditing ? (
+          <>
+            <h2>{title}</h2>
+            <p>{body}</p>
+          </>
+        ) : (
+          <>
+            <input
+              type="text"
+              name="new-post-title"
+              id="new-post-title"
+              // @ts-ignore
+              minLength="5"
+              // @ts-ignore
+              maxLength="20"
+              placeholder="Title of your post (optional)"
+              value={postTitle}
+              onChange={(e) => setPostTitle(e.target.value)}
+            />
+            <textarea
+              name="new-post-content"
+              id="new-post-content"
+              // @ts-ignore
+              minLength="1"
+              // @ts-ignore
+              maxLength="150"
+              placeholder="Content of your post..."
+              value={postContent}
+              onChange={(e) => setPostContent(e.target.value)}
+            ></textarea>
+          </>
+        )}
         <div className="button-wrapper">
           <button
             className="app-button"
-            onClick={async () => {
+            type="button"
+            onClick={async (e) => {
+              e.preventDefault();
               try {
-                const res = await fetch(
-                  `${process.env.BASE_URL}/api/deletePost`,
-                  {
-                    method: "DELETE",
-                    body: JSON.stringify(apiData),
-                  }
-                );
-                console.log(res);
-                const data = await res.json();
-
-                console.log(data);
+                // console.log(process.env.BASE_URL);
+                await fetch("/api/deletePost", {
+                  method: "DELETE",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(apiData),
+                });
+                router.refresh();
               } catch (err: any) {
                 console.log(err.message);
               }
@@ -65,13 +104,24 @@ export const Post: React.FC<PostProps> = ({
           <button
             className="app-button"
             onClick={async () => {
-              // await fetch(`${process.env.BASE_URL}/api/editPost`, {
-              //   method: "PUT",
-              //   body: JSON.stringify(editData),
-              // });
+              console.log(editData);
+              if (!isEditing) {
+                setIsEditing(true);
+              } else {
+                setIsEditing(false);
+                try {
+                  await fetch("/api/editPost", {
+                    method: "PUT",
+                    body: JSON.stringify(editData),
+                  });
+                  router.refresh();
+                } catch (err: any) {
+                  console.log(err.message);
+                }
+              }
             }}
           >
-            Edit
+            {isEditing ? "Done" : "Edit"}
           </button>
         </div>
       </div>

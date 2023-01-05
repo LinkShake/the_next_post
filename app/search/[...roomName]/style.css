@@ -1,0 +1,15 @@
+.room-preview-link {
+  font-size: 20px;
+  text-decoration: underline;
+}
+
+.room-preview-div {
+  background-color: var(--primary-color-700);
+  height: 8vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 0.25vw;
+}

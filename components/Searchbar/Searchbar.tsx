@@ -1,14 +1,14 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export const Searchbar = () => {
   const [inputValue, setInputValue] = useState<string>("");
-  const router = useRouter();
+  // const router = useRouter();
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <>
       <input
         type="text"
         // @ts-ignore
@@ -21,7 +21,7 @@ export const Searchbar = () => {
           console.log(e.target.value);
         }}
       />
-      <Link href={`/search/${inputValue}`}>search</Link>
-    </form>
+      <Link href={`/search/${inputValue.toLowerCase()}`}>search</Link>
+    </>
   );
 };
