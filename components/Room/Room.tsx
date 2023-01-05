@@ -48,7 +48,14 @@ export const Room: React.FC<RoomProps> = ({
             );
           })}
         </ul>
-        <button className="app-button" onClick={() => setModalState(true)}>
+        <button
+          className="app-button"
+          onClick={() => setModalState(true)}
+          style={{
+            position: "absolute",
+            right: "16vw",
+          }}
+        >
           Create post
         </button>
       </div>

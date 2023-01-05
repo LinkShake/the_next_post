@@ -52,7 +52,7 @@ export const Post: React.FC<PostProps> = ({
             <p>{body}</p>
           </>
         ) : (
-          <>
+          <div className="edit-data-post">
             <input
               type="text"
               name="new-post-title"
@@ -76,7 +76,7 @@ export const Post: React.FC<PostProps> = ({
               value={postContent}
               onChange={(e) => setPostContent(e.target.value)}
             ></textarea>
-          </>
+          </div>
         )}
         <div className="button-wrapper">
           <button

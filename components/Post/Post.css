@@ -5,8 +5,8 @@
   overflow-y: auto;
   width: 50rem;
   border-radius: 0.75rem;
-  border: 1px solid gray;
-  background-color: var(--primary-color-900);
+  /* border: 1px solid gray; */
+  background-color: var(--primary-color-800);
   padding: 2rem;
 }
 
@@ -16,4 +16,29 @@
   bottom: 0.75vw;
   right: 0.75vw;
   gap: 20px;
+}
+
+.edit-data-post {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
+
+.edit-data-post input,
+.edit-data-post textarea {
+  width: 100%;
+  border: none;
+  height: 5vh;
+  padding-left: 0.75vw;
+  color: white;
+  /* border: 0.5px solid gray; */
+  border-radius: 10px;
+  background-color: var(--primary-color-700);
+}
+
+.edit-data-post textarea {
+  resize: none;
+  padding: 1.5rem;
+  font-family: "Helvetica", Arial, Lucida Grande, sans-serif !important;
+  height: 25vh;
 }

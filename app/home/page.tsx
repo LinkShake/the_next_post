@@ -34,7 +34,7 @@ export default async function App() {
                   href={`/room/${roomName.toLowerCase()}?id=${_id}`}
                   className="room-preview-link"
                 >
-                  {roomName.toUpperCase()}
+                  {roomName}
                 </Link>
               </div>
             );

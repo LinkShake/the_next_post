@@ -10,46 +10,47 @@ export default async function Page({
   searchParams: any;
 }) {
   const { roomName } = params;
-  console.log(roomName);
-  let res;
-
-  if (roomName.length) {
-    res = await fetch(`${process.env.BASE_URL}/api/search`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        value: roomName[0],
-        originalURL: `/search/${roomName[0]}`,
-      }),
-    });
-  } else {
-    return <div>No rooms matching your search params</div>;
-  }
+  const res = await fetch(`${process.env.BASE_URL}/api/search`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      value: roomName[0],
+      originalURL: `/search/${roomName[0]}`,
+    }),
+  });
 
   const dataToDisplay: Room[] | undefined = await res.json();
 
-  return (
-    <ul
-      style={{
-        listStyle: "none",
-      }}
-    >
-      {dataToDisplay?.map(({ _id, roomName, usersNum }) => {
-        // console.log(usersNum);
-        return (
-          <div key={_id} className="room-preview-div">
-            <Link
-              href={`/room/${roomName.toLowerCase()}?id=${_id}`}
-              className="room-preview-link"
-            >
-              {roomName}
-            </Link>
-            <div className="users-displayer">{usersNum}</div>
-          </div>
-        );
-      })}
-    </ul>
-  );
+  if (dataToDisplay?.length) {
+    return (
+      <ul
+        style={{
+          listStyle: "none",
+        }}
+      >
+        {dataToDisplay?.map(({ _id, roomName, usersNum }) => {
+          // console.log(usersNum);
+          return (
+            <div key={_id} className="room-preview-div">
+              <Link
+                href={`/room/${roomName.toLowerCase()}?id=${_id}`}
+                className="room-preview-link"
+              >
+                {roomName}
+              </Link>
+              <div className="users-displayer">{usersNum}</div>
+            </div>
+          );
+        })}
+      </ul>
+    );
+  } else {
+    return (
+      <div className="no-rooms-found-div">
+        No rooms corrisponding to your query...
+      </div>
+    );
+  }
 }

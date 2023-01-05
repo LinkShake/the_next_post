@@ -13,3 +13,14 @@
   margin: 20px;
   border-radius: 0.25vw;
 }
+
+.no-rooms-found-div {
+  display: flex;
+  /* border: 1px solid red; */
+  justify-content: center;
+  align-items: center;
+  height: 7rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: gray;
+}
