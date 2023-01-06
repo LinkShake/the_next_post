@@ -4,6 +4,7 @@ import { PostData } from "interfaces/PostsData";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Linkify from "linkify-react";
 import "./Post.css";
 
 interface PostProps {
@@ -54,9 +55,9 @@ export const Post: React.FC<PostProps> = ({
       <div className="post-card">
         {!isEditing ? (
           <>
-            <h2>{title}</h2>
+            <Linkify as="h2">{title}</Linkify>
             <h2 id="post-author">by {userName}</h2>
-            <p>{body}</p>
+            <Linkify as="p">{body}</Linkify>
           </>
         ) : (
           <div className="edit-data-post">
