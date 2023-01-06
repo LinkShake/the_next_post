@@ -1,6 +1,7 @@
 "use client";
 import { AuthContext } from "components/AuthContext";
 import { PostData } from "interfaces/PostsData";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import "./Post.css";
@@ -21,6 +22,8 @@ export const Post: React.FC<PostProps> = ({
   roomName: string;
 }) => {
   const { _id, title, body, author } = data;
+  const { userName, email } = author;
+  const { data: session, status } = useSession();
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [postTitle, setPostTitle] = useState<string>(title);
   const [postContent, setPostContent] = useState<string>(body);
@@ -41,14 +44,18 @@ export const Post: React.FC<PostProps> = ({
     title: postTitle,
     content: postContent,
   };
+  const userCondition =
+    status === "authenticated" &&
+    session.user?.name === userName &&
+    session.user.email === email;
 
   return (
     <AuthContext>
       <div className="post-card">
-        <h2>Post by {author}</h2>
         {!isEditing ? (
           <>
             <h2>{title}</h2>
+            <h2 id="post-author">by {userName}</h2>
             <p>{body}</p>
           </>
         ) : (
@@ -78,52 +85,53 @@ export const Post: React.FC<PostProps> = ({
             ></textarea>
           </div>
         )}
-        <div className="button-wrapper">
-          <button
-            className="app-button"
-            type="button"
-            onClick={async (e) => {
-              e.preventDefault();
-              try {
-                // console.log(process.env.BASE_URL);
-                await fetch("/api/deletePost", {
-                  method: "DELETE",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify(apiData),
-                });
-                router.refresh();
-              } catch (err: any) {
-                console.log(err.message);
-              }
-            }}
-          >
-            Delete
-          </button>
-          <button
-            className="app-button"
-            onClick={async () => {
-              console.log(editData);
-              if (!isEditing) {
-                setIsEditing(true);
-              } else {
-                setIsEditing(false);
+        {userCondition && (
+          <div className="button-wrapper">
+            <button
+              className="app-button"
+              type="button"
+              onClick={async (e) => {
+                e.preventDefault();
                 try {
-                  await fetch("/api/editPost", {
-                    method: "PUT",
-                    body: JSON.stringify(editData),
+                  await fetch("/api/deletePost", {
+                    method: "DELETE",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(apiData),
                   });
                   router.refresh();
                 } catch (err: any) {
                   console.log(err.message);
                 }
-              }
-            }}
-          >
-            {isEditing ? "Done" : "Edit"}
-          </button>
-        </div>
+              }}
+            >
+              Delete
+            </button>
+            <button
+              className="app-button"
+              onClick={async () => {
+                console.log(editData);
+                if (!isEditing) {
+                  setIsEditing(true);
+                } else {
+                  setIsEditing(false);
+                  try {
+                    await fetch("/api/editPost", {
+                      method: "PUT",
+                      body: JSON.stringify(editData),
+                    });
+                    router.refresh();
+                  } catch (err: any) {
+                    console.log(err.message);
+                  }
+                }
+              }}
+            >
+              {isEditing ? "Done" : "Edit"}
+            </button>
+          </div>
+        )}
       </div>
     </AuthContext>
   );

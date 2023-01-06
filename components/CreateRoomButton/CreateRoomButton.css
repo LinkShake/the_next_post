@@ -1,10 +1,4 @@
-#create-room-button-authenticated {
-  position: absolute;
-  bottom: 2vh;
-  right: 1vw;
-}
-
-#create-room-button-not-authenticated {
+#create-room-button {
   position: absolute;
   bottom: 2vh;
   right: 1vw;

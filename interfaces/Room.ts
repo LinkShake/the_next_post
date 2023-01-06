@@ -1,8 +1,10 @@
+import { PostData } from "./PostsData";
+
 export interface Room {
   _id: string;
   roomName: string;
   description: string | undefined;
-  posts: any[];
+  posts: PostData[];
   usersNum: number;
   __v: number;
 }

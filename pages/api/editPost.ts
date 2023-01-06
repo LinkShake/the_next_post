@@ -16,35 +16,20 @@ export default async function handler(
     try {
       const data = JSON.parse(body);
       await dbConnect();
+      console.log(data.id);
 
       if (method === "PUT") {
         const room = await Room.findById(data.roomId);
 
-        //   @ts-ignore
-        room.posts.forEach(({ _id, author, title, body }) => {
-          if (_id === data.id && author === data.author) {
-            title = data.title;
-            body = data.content;
+        room.posts.forEach((postData: any, idx: number) => {
+          if (postData._id == data.id) {
+            room.posts[idx].title = data.title;
+            room.posts[idx].body = data.content;
           }
         });
 
         await room.save();
 
-        // await Room.updateOne(
-        // { _id: data.roomId },
-        // {
-        //   $pull: {
-        //     posts: {
-        //       _id: data.id,
-        //       author: data.author,
-        //       title: data.title,
-        //       body: data.content,
-        //     },
-        //   },
-        // }
-        //   );
-
-        res.redirect("/home");
         res.status(200).json({ msg: "Success" });
       } else res.status(405).json({ msg: "Invalid fetch method" });
     } catch (err: any) {

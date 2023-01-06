@@ -22,7 +22,10 @@ export default async function handler(
           {
             $push: {
               posts: {
-                author: data.author,
+                author: {
+                  userName: data.author_name,
+                  email: data.author_email,
+                },
                 title: data.title,
                 body: data.content,
               },
@@ -30,7 +33,7 @@ export default async function handler(
           }
         );
 
-        res.redirect(`/home`);
+        res.redirect(`/room/${data.roomName}?id=${data.roomId}`);
         res.status(200).json({ msg: "Success!" });
       } else {
         res.status(405).json({ msg: "Invalid fetch method" });

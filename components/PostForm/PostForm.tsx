@@ -1,17 +1,20 @@
 "use client";
 import { useSession } from "next-auth/react";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, FormEvent, SetStateAction, useEffect } from "react";
 import "./PostForm.css";
 
 interface PostFormProps {
   id: string;
+  roomName: string;
   setModalState: Dispatch<SetStateAction<boolean>>;
 }
 export const PostForm: React.FC<PostFormProps> = ({
   id,
+  roomName,
   setModalState,
 }: {
   id: string;
+  roomName: string;
   setModalState: Dispatch<SetStateAction<boolean>>;
 }) => {
   const { data: session } = useSession();
@@ -45,15 +48,31 @@ export const PostForm: React.FC<PostFormProps> = ({
         >
           &times;
         </button>
-        <label htmlFor="author"></label>
+        <label htmlFor="author_name"></label>
         <input
           type="text"
           required
-          id="author"
-          name="author"
+          id="author_name"
+          name="author_name"
           readOnly
           // @ts-ignore
           value={session?.user?.name}
+          style={{
+            display: "none",
+            backgroundColor: "var(--primary-color-700)",
+            fontSize: "1.35rem",
+            border: "none",
+          }}
+        />
+        <label htmlFor="author_email"></label>
+        <input
+          type="text"
+          required
+          id="author_email"
+          name="author_email"
+          readOnly
+          // @ts-ignore
+          value={session?.user?.email}
           style={{
             display: "none",
             backgroundColor: "var(--primary-color-700)",
@@ -71,16 +90,27 @@ export const PostForm: React.FC<PostFormProps> = ({
           value={id}
           style={{ display: "none" }}
         />
+        <label htmlFor="roomName"></label>
+        <input
+          type="text"
+          required
+          id="roomName"
+          name="roomName"
+          readOnly
+          value={roomName}
+          style={{ display: "none" }}
+        />
         <label htmlFor="title">Title of the post</label>
         <input
           type="text"
           id="title"
           name="title"
+          required
           // @ts-ignore
           minLength="5"
           // @ts-ignore
           maxLength="20"
-          placeholder="Title of your post (optional)"
+          placeholder="Title of your post"
         />
         <label htmlFor="content">Content of the post</label>
         <textarea

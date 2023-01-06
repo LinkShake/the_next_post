@@ -32,7 +32,11 @@ export const Room: React.FC<RoomProps> = ({
       <div className="room-main-grid">
         <div className="room-title">{roomName}</div>
         {modalState ? (
-          <PostForm id={roomId} setModalState={setModalState} />
+          <PostForm
+            id={roomId}
+            roomName={roomName}
+            setModalState={setModalState}
+          />
         ) : (
           <></>
         )}
