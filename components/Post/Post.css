@@ -13,7 +13,7 @@
 .button-wrapper {
   display: flex;
   position: absolute;
-  bottom: 0.75vw;
+  bottom: 5.5vh;
   right: 0.75vw;
   gap: 20px;
 }
@@ -56,4 +56,26 @@
   margin: 0.25rem;
   margin-bottom: 0.5rem;
   /* border: 1px solid red; */
+}
+
+.comments-button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4.5vh;
+  width: 100%;
+  background-color: var(--primary-color-800);
+  border: none;
+  border-top: 2px solid gray;
+  font-size: 0.75vw;
+  color: cornflowerblue;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.comments-button:hover {
+  transition: 0.2s;
+  /* opacity: 0.8; */
+  background-color: var(--primary-color-700);
+  text-decoration: underline;
 }

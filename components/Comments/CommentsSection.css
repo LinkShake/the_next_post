@@ -1,0 +1,40 @@
+.comments-section {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  min-height: 4.5vh;
+  max-height: 15vh;
+  overflow-y: auto;
+  width: 100%;
+  background-color: var(--primary-color-800);
+  border: none;
+  border-top: 2px solid gray;
+  font-size: 0.75vw;
+  padding: 2rem;
+  padding-top: 0.75rem;
+}
+
+.current-comment {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: flex-start;
+  align-items: center;
+  height: fit-content;
+  border: 1px solid blue;
+  gap: 0.2vw;
+}
+
+.current-comment h2,
+.current-comment p {
+  border: 1px solid red;
+  margin: 0;
+  padding: 0;
+}
+
+.current-comment h2 {
+  font-size: 0.8vw;
+}
+
+.current-comment p {
+  font-size: 0.65vw;
+}

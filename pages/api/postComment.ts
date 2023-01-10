@@ -1,8 +1,9 @@
 import dbConnect from "@/utils/dbConnection";
-import { NextApiRequest, NextApiResponse } from "next";
 import Room from "./schemas/room";
-import { unstable_getServerSession } from "next-auth/next";
+import { NextApiRequest, NextApiResponse } from "next";
+import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "./auth/[...nextauth]";
+import { PostData } from "interfaces/PostsData";
 
 export default async function handler(
   req: NextApiRequest,
@@ -13,26 +14,27 @@ export default async function handler(
     const { method } = req;
     const { body } = req;
     const data = body;
+    console.log(data);
     try {
       await dbConnect();
 
       if (method === "POST") {
-        await Room.updateOne(
-          { _id: data.roomId },
-          {
-            $push: {
-              posts: {
-                author: {
-                  userName: data.author_name,
-                  email: data.author_email,
-                },
-                title: data.title,
-                body: data.content,
-                comments: [],
+        const room = await Room.findById(data.roomId);
+
+        room.posts.forEach((postData: PostData, idx: number) => {
+          if (postData._id == data.id) {
+            console.log(room.posts[idx].comments);
+            room.posts[idx].comments.push({
+              author: {
+                userName: data.author_name,
+                email: data.author_email,
               },
-            },
+              body: data.content,
+            });
           }
-        );
+        });
+
+        await room.save();
 
         res.redirect(`/room/${data.roomName}?id=${data.roomId}`);
         res.status(200).json({ msg: "Success!" });

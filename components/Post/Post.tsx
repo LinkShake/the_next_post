@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Linkify from "linkify-react";
 import "./Post.css";
+import { CommentsSection } from "components/Comments/CommentsSection";
 
 interface PostProps {
   data: PostData;
@@ -28,6 +29,7 @@ export const Post: React.FC<PostProps> = ({
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [postTitle, setPostTitle] = useState<string>(title);
   const [postContent, setPostContent] = useState<string>(body);
+  const [showComments, setShowComments] = useState<boolean>(false);
   const router = useRouter();
   const apiData = {
     roomId,
@@ -44,6 +46,13 @@ export const Post: React.FC<PostProps> = ({
     author,
     title: postTitle,
     content: postContent,
+  };
+  const commentsData = {
+    roomId,
+    roomName,
+    id: _id,
+    author,
+    comments: data.comments,
   };
   const userCondition =
     status === "authenticated" &&
@@ -132,6 +141,16 @@ export const Post: React.FC<PostProps> = ({
               {isEditing ? "Done" : "Edit"}
             </button>
           </div>
+        )}
+        {showComments ? (
+          <CommentsSection {...commentsData} />
+        ) : (
+          <button
+            className="comments-button"
+            onClick={() => setShowComments(true)}
+          >
+            View comments
+          </button>
         )}
       </div>
     </AuthContext>

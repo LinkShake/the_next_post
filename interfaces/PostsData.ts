@@ -1,3 +1,5 @@
+import { Comments } from "./Comments";
+
 export interface PostData {
   _id: string;
   author: {
@@ -6,5 +8,6 @@ export interface PostData {
   };
   title: string;
   body: string;
+  comments: Comments[];
   __v: number;
 }

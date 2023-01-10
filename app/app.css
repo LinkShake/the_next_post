@@ -5,6 +5,8 @@
   --modal-bg: #151a21;
   --button-color: #fd4d4d;
   --general-color: #fff;
+  --main-font-family: Roboto;
+  --fm: Consolas, "Courier New", monospace;
 }
 
 .posts-container {
