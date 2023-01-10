@@ -1,34 +1,83 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TheNextPost
 
-## Getting Started
+## Index
 
-First, run the development server:
+[//]: <> (prettier ignore)
 
-```bash
-npm run dev
-# or
-yarn dev
+> - [About](https://github.com/LinkShake/the_next_post#about)
+>   - [The project](https://github.com/LinkShake/the_next_post#the-project)
+>   - [The techstack](https://github.com/LinkShake/the_next_post#the-techstack)
+> - [Setup](https://github.com/LinkShake/the_next_post#setup):
+>   - [Download the code and install all the dependencies](https://github.com/LinkShake/the_next_post#download-the-code-and-install-all-the-dependencies)
+> - [Run the project](https://github.com/LinkShake/the_next_post#run-the-project):
+>   - [Run via CLI and npm](https://github.com/LinkShake/the_next_post#run-via-cli-and-npm)
+> - [Future of the project](https://github.com/LinkShake/the_next_post#future-of-the-project):
+>   - [What misses in the project](https://github.com/LinkShake/the_next_post#what-misses-in-the-project)
+>   - [Potential new features](https://github.com/LinkShake/the_next_post#potential-new-features)
+
+## About
+
+### The project
+
+TheNextPost is a "reddit-clone". More precisly is a fullstack web app realized with the core concepts of rooms that users can create.
+In these rooms you can post some text content, edit it or delete it and you can also comment different posts.
+
+### The techstack
+
+To build this project I used mainly these technologies:
+
+| Language | Typescript |
+| Framework | Next.js 13 |
+| Database | Mongodb |
+| ODM | Mongoose.js |
+| Auth | Nextauth.js |
+
+I built everything on top of REST APIs directly in the api routes provided by Next.
+
+## Setup
+
+**Important:** To download the dependencies and run the project you need [`Node.js`](https://nodejs.org/it/) and [`npm`](https://www.npmjs.com/) installed on your machine. To be able to do CRUD operations you have to have Mongodb installed.
+
+### Download the code and install all the dependencies
+
+In order to download the code you can clone the repo
+
+```
+git clone https://github.com/LinkShake/the_next_post.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+or you can decide to download zipped code.
+To download all the dependencies run
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+ npm i
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+in the command line.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Setup the enviroment variables
 
-## Learn More
+In order to use the app you have to create a `.env` file with:
 
-To learn more about Next.js, take a look at the following resources:
+- your github id
+- your github app's secret
+- your db URI
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+For more information about auth check [`Nextauth`](https://next-auth.js.org/getting-started/example) docs.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Run the project
 
-## Deploy on Vercel
+### Run via CLI and npm
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To run this project using the command line and npm you have to write
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+npm dev
+```
+
+in your command line and press enter: this will launch the app at `http://localhost:3000`.
+
+## Future of the project
+
+- Polish the comments feature
+- Make the app responsive
