@@ -26,11 +26,13 @@ In these rooms you can post some text content, edit it or delete it and you can 
 
 To build this project I used mainly these technologies:
 
-| Language | Typescript |
-| Framework | Next.js 13 |
-| Database | Mongodb |
-| ODM | Mongoose.js |
-| Auth | Nextauth.js |
+|               |                                                 |
+| ------------- | ----------------------------------------------- |
+| **Language**  | [`Typescript`](https://www.typescriptlang.org/) |
+| **Framework** | [`Next.js 13`](https://beta.nextjs.org/)        |
+| **Database**  | [`Mongodb`](https://www.mongodb.com/)           |
+| **ODM**       | [`Mongoose.js`](https://mongoosejs.com/)        |
+| **Auth**      | [`Nextauth.js`](https://next-auth.js.org/)      |
 
 I built everything on top of REST APIs directly in the api routes provided by Next.
 
