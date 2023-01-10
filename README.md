@@ -9,6 +9,7 @@
 >   - [The techstack](https://github.com/LinkShake/the_next_post#the-techstack)
 > - [Setup](https://github.com/LinkShake/the_next_post#setup):
 >   - [Download the code and install all the dependencies](https://github.com/LinkShake/the_next_post#download-the-code-and-install-all-the-dependencies)
+> - [Setup the enviroment variables](https://github.com/LinkShake/the_next_post#setup-the-enviroment-variables)
 > - [Run the project](https://github.com/LinkShake/the_next_post#run-the-project):
 >   - [Run via CLI and npm](https://github.com/LinkShake/the_next_post#run-via-cli-and-npm)
 > - [Future of the project](https://github.com/LinkShake/the_next_post#future-of-the-project):
